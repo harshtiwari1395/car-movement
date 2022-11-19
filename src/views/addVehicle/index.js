@@ -12,13 +12,24 @@ export default () => {
     initialPositionY: 0,
     speed: 0,
     direction: 0,
-    scenario: {},
   });
+  const [scenarioId, setScenarioId]= useState("");
   
   const addHandler=()=>{
-    setVehicles(vehicles=>[...vehicles, vehicle]);
-    console.log("addHandler", [...vehicles, vehicle]);
+    // setVehicles(vehicles=>[...vehicles, vehicle]);
+    // console.log("addHandler", [...vehicles, vehicle]);
+    console.log({scenarioId});
+    const vehiclesCopy= {...vehicles};
+     if(vehiclesCopy[scenarioId])
+     {
+      vehiclesCopy[scenarioId].push(vehicle);
+     }
+     else {
+      vehiclesCopy[scenarioId]= [vehicle];
+     }
+     setVehicles(vehiclesCopy);
   }
+
   const resetHandler=()=>{
     setVehicle({
       vehicleId: uuid(),
@@ -27,7 +38,6 @@ export default () => {
       initialPositionY: 0,
       speed: 0,
       direction: 0,
-      scenario: {},
     });
   }
   const backHandler=()=>{
@@ -51,7 +61,7 @@ export default () => {
               </label>
               <Select
                 options={scenarioDropdownValues}
-                onChange={(value) => setVehicle(vehicle=> ({...vehicle, vehicleName: value}))}
+                onChange={(value) => setScenarioId(value[0].scenarioId)}
               /> 
             </span>
             <span>
@@ -68,7 +78,7 @@ export default () => {
                   display: "flex",
                   flexDirection: "column",
                 }}
-                onChange={(value) => setVehicle(vehicle=> ({...vehicle, scenario: value}))}
+                onChange={(e) => setVehicle(vehicle=> ({...vehicle, vehicleName: e.target.value}))}
               />
             </span>
             <span>
@@ -85,7 +95,7 @@ export default () => {
                   display: "flex",
                   flexDirection: "column",
                 }}
-                onChange={(value) => setVehicle(vehicle=> ({...vehicle, speed: value}))}
+                onChange={(e) => setVehicle(vehicle=> ({...vehicle, speed: Number(e.target.value)}))}
 
               />
             </span>
@@ -106,7 +116,7 @@ export default () => {
                   display: "flex",
                   flexDirection: "column",
                 }}
-                onChange={(value) => setVehicle(vehicle=> ({...vehicle, initialPositionX: value}))}
+                onChange={(e) => setVehicle(vehicle=> ({...vehicle, initialPositionX: Number(e.target.value)}))}
               />
             </span>
             <span>
@@ -123,7 +133,7 @@ export default () => {
                   display: "flex",
                   flexDirection: "column",
                 }}
-                onChange={(value) => setVehicle(vehicle=> ({...vehicle, initialPositionY: value}))}
+                onChange={(e) => setVehicle(vehicle=> ({...vehicle, initialPositionY: Number(e.target.value)}))}
               />
             </span>
             <span>
@@ -141,7 +151,7 @@ export default () => {
                           {value: "up", label : "up"},
                           {value: "down", label : "down"}
                          ]}
-                onChange={(value) => setVehicle(vehicle=> ({...vehicle, direction: value}))}
+                onChange={(value) => setVehicle(vehicle=> ({...vehicle, direction: value[0].value}))}
               /> 
             </span>
           </div>

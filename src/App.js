@@ -15,20 +15,20 @@ const AddVehicalWithLayout= Layout(AddVehical);
 
 export const GlobalContext= createContext(null);
 const App = () => {
-  const [vehicles, setVehicles] = useState([
+  const [vehicles, setVehicles] = useState({"test": [
     {
       vehicleId: 123,
       vehicleName: "testVehical",
-      initialPositionX: 50,
-      initialPositionY: 50,
-      speed:2,
-      direction: 0,
-      scenarioId: 1
+      initialPositionX: 400,
+      initialPositionY: 400,
+      speed:100,
+      direction: "down",
     }
-  ]);
+  ]});
+  //change how vehicles are stores {scenario1: [...vehicls],scenario2: [...vehicls] }
   const [scenerios, setScenerios] = useState([
     {
-      scenarioId: 1,
+      scenarioId: "test",
       scenarioName: "test",
       time: new Date(),
     }
