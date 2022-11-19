@@ -23,6 +23,7 @@ const App = () => {
       initialPositionY: 400,
       speed:100,
       direction: "down",
+      color : `#${Math.floor(Math.random()*16777215).toString(16)}`
     }
   ]});
   //change how vehicles are stores {scenario1: [...vehicls],scenario2: [...vehicls] }

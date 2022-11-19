@@ -12,6 +12,7 @@ export default () => {
     initialPositionY: 0,
     speed: 0,
     direction: 0,
+    color: ""
   });
   const [scenarioId, setScenarioId]= useState("");
   
@@ -38,6 +39,7 @@ export default () => {
       initialPositionY: 0,
       speed: 0,
       direction: 0,
+      color: `#${Math.floor(Math.random()*16777215).toString(16)}`
     });
   }
   const backHandler=()=>{

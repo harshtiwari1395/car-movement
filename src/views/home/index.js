@@ -16,7 +16,7 @@ const VehicleTracker = ({ vehicles, scenarioId }) => {
               style={{
                 top: item.initialPositionY,
                 left: item.initialPositionX,
-                backgroundColor: `#${Math.floor(Math.random()*16777215).toString(16)}`,
+                backgroundColor: item.color,
                 borderRadius: "50%",
                 height: 20,
                 width: 20,
