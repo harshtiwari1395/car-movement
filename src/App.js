@@ -18,9 +18,9 @@ const App = () => {
     {
       vehicleId: 123,
       vehicleName: "testVehical",
-      initialPositionX: 400,
-      initialPositionY: 400,
-      speed:100,
+      initialPositionX: 200,
+      initialPositionY: 200,
+      speed:50,
       direction: "down",
       color : `#${Math.floor(Math.random()*16777215).toString(16)}`,
       display: "block"
@@ -31,7 +31,7 @@ const App = () => {
     {
       scenarioId: "test",
       scenarioName: "test",
-      time: new Date(),
+      time: 2,
     }
   ]);
   const options= useCallback(()=>scenerios.reduce((acc, item)=>{

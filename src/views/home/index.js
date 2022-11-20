@@ -3,6 +3,7 @@ import "./index.scss";
 import { GlobalContext } from "../../App";
 import Select from "react-dropdown-select";
 
+////add time logic here
 const VehicleTracker = ({ vehicles, scenarioId }) => {
   return (
     <div id="OverviewText4">
@@ -12,7 +13,7 @@ const VehicleTracker = ({ vehicles, scenarioId }) => {
           console.log({ item });
           return (
             <div
-              key={item.vehicleName}
+              key={item.vehicleName+ item.time}
               style={{
                 top: item.initialPositionY,
                 left: item.initialPositionX,
@@ -37,9 +38,13 @@ export default () => {
     scenarioDropdownValues,
   } = useContext(GlobalContext);
   const [selectedScenario, setSelectedScenario] = useState(null);
+  const currentScenario= scenerios.find(item=> item.scenarioId===selectedScenario);
   console.log({ vehicles, scenerios });
   const locationHandler = useRef(null);
+  const timeTracker=()=> setTimeout(()=>stopSimulation(), currentScenario.time*1000+100);
   const startSimulation = () => {
+    timeTracker();
+    console.log("locationHandler.current",locationHandler.current);
     if(!locationHandler.current )
     {    const vehiclesCopy = { ...vehicles };
     locationHandler.current = setInterval(() => {
@@ -87,6 +92,7 @@ export default () => {
 
   const stopSimulation = () => {
     clearInterval(locationHandler.current);
+    locationHandler.current=null
   };
 
   return (

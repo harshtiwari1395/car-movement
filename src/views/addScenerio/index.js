@@ -5,7 +5,7 @@ import uuid from 'react-uuid';
 export default () => {
   const { setScenerios, scenerios } = useContext(GlobalContext);
   const [name, setName]= useState("");
-  const [time, setTime]= useState(0);
+  const [time, setTime]= useState(1);
   console.log("scenerios", scenerios);
   const addScenario= ()=>{
     setScenerios(scenerios=> ([...scenerios,  {
@@ -63,6 +63,7 @@ export default () => {
               value={time}
               onChange={e=> setTime(Number(e.target.value))}
               type="number"
+              min="1"
             />
           </span>
           </div>
