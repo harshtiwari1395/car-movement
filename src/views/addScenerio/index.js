@@ -61,7 +61,7 @@ export default () => {
                 flexDirection: "column",
               }}
               value={time}
-              onChange={e=> setTime(e.target.value)}
+              onChange={e=> setTime(Number(e.target.value))}
               type="number"
             />
           </span>
