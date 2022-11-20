@@ -20,6 +20,7 @@ const VehicleTracker = ({ vehicles, scenarioId }) => {
                 borderRadius: "50%",
                 height: 20,
                 width: 20,
+                display: item.display
               }}
             />
           );
@@ -54,25 +55,25 @@ export default () => {
               if(item.initialPositionX+item.speed<=780)
                 item.initialPositionX += item.speed;
               else
-                item.initialPositionX=780  
+                item.display ="none"
               break;
             case "backward":
               if(item.initialPositionX-item.speed>=0)
                 item.initialPositionX -= item.speed;
               else
-                item.initialPositionX=0  
+                item.display ="none"
               break;
             case "up":
               if(item.initialPositionY-item.speed>=0)
                 item.initialPositionY -= item.speed;
               else 
-                item.initialPositionY =0  
+                item.display ="none"
               break;
             case "down":
               if(item.initialPositionY+item.speed<=780)
                 item.initialPositionY += item.speed;
               else 
-                item.initialPositionY =780
+                item.display ="none"
               break;
             default:
               break;
