@@ -12,7 +12,7 @@ export default () => {
     initialPositionY: 0,
     speed: 0,
     direction: 0,
-    color: "",
+    color: `#${Math.floor(Math.random()*16777215).toString(16)}`,
     display: "block"
   });
   const [scenarioId, setScenarioId]= useState("");

@@ -1,7 +1,6 @@
 import React, { createContext, useState, useCallback } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./views/home/index";
-import Other from "./views/other/index";
 import Layout from "./components/layout/index";
 import AddScenario from "./views/addScenerio/index";
 import AllScenario from "./views/allScenerio/index";
@@ -23,7 +22,8 @@ const App = () => {
       initialPositionY: 400,
       speed:100,
       direction: "down",
-      color : `#${Math.floor(Math.random()*16777215).toString(16)}`
+      color : `#${Math.floor(Math.random()*16777215).toString(16)}`,
+      display: true
     }
   ]});
   //change how vehicles are stores {scenario1: [...vehicls],scenario2: [...vehicls] }
