@@ -3,7 +3,7 @@ import { GlobalContext } from "./../../App";
 import uuid from 'react-uuid';
 
 export default () => {
-  const { setScenerios, scenerios } = useContext(GlobalContext);
+  const { setScenerios, scenerios, setVehicles } = useContext(GlobalContext);
   const [name, setName]= useState("");
   const [time, setTime]= useState(1);
   console.log("scenerios", scenerios);
@@ -13,7 +13,8 @@ export default () => {
       scenarioName: name,
       time
     }
-  ]))
+  ]));
+  setVehicles(vals=> ({...vals, [name] : []}))
   };
 
   const resetScenario= ()=>{

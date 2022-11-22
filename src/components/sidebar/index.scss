@@ -26,6 +26,9 @@
       &:hover {
         background: $sidebar-default-hover;
       }
+      &:active {
+        background-color: yellow;
+      }
     }
   }
   &--blue {
@@ -50,6 +53,10 @@
       &:hover {
         background: $sidebar-dark-hover;
         color: white;
+      }
+
+      &:active {
+        background-color: yellow;
       }
     }
   }
