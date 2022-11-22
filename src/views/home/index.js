@@ -5,10 +5,10 @@ import { GlobalContext } from "../../App";
 import Select from "react-select";
 import Table from "./table";
 ////REPLACE react-dropdown-select WITH REACT-SELCT
-const VehicleTracker = ({ vehicles, scenario}) => {
-  console.log("track",{ vehicles, scenario });
-  const scenarioId= scenario.scenarioId;
-  console.log("veh", vehicles[scenarioId]);
+const VehicleTracker = ({ vehicles, scenario }) => {
+  console.log("track", { vehicles, scenario });
+  const scenarioId = scenario ? scenario.scenarioId: null;
+  // console.log("veh", vehicles[scenarioId]);
   return (
     <div id="OverviewText4">
       {scenarioId &&
@@ -65,9 +65,7 @@ export default () => {
           "vehiclesCopy[selectedScenario]",
           vehiclesCopy[selectedScenario]
         );
-        console.log(
-                  {vehiclesCopy, selectedScenario}
-        );
+        console.log({ vehiclesCopy, selectedScenario });
         const modifiedVehicles =
           vehiclesCopy[selectedScenario.scenarioId] &&
           vehiclesCopy[selectedScenario.scenarioId].map((item) => {
@@ -117,12 +115,20 @@ export default () => {
             options={scenarioDropdownValues}
             onChange={(value) => setSelectedScenario(value)}
           />
-          <Table vehicles={vehicles} selectedScenario={selectedScenario} setVehicles={setVehicles} />
+          {selectedScenario ? (
+            <Table
+              vehicles={vehicles}
+              scenerios={scenerios}
+              selectedScenario={selectedScenario}
+              setVehicles={setVehicles}
+            />
+          ) : null}
           <button onClick={startSimulation}>Start Simulation</button>
           <button onClick={stopSimulation}>Stop Simulation</button>
-          <VehicleTracker vehicles={vehicles} 
-          // scenarioId={selectedScenario} 
-          scenario={selectedScenario} 
+          <VehicleTracker
+            vehicles={vehicles}
+            // scenarioId={selectedScenario}
+            scenario={selectedScenario}
           />
         </div>
       </div>

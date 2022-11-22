@@ -4,25 +4,37 @@ import ModalRoot from "../../components/modals/components/ModalRoot";
 import ModalService from "../../components/modals/services/ModalService";
 import "./table.scss";
 
-const TableComponent = ({vehicles, selectedScenario, setVehicles}) => {
-  console.log({vehicles, selectedScenario, all:  vehicles[selectedScenario]});
-  const [tableData, setTableData] = useState([
-    // {
-    //   vehicleId: 123,
-    //   vehicleName: "Scenario Name",
-    //   positionX: 2,
-    //   positionY: 1,
-    //   speed: 10,
-    //   direction: "forward",
-    // },
-    ...vehicles[selectedScenario.scenarioId]
-  ]);
-
+const TableComponent = ({scenerios, vehicles, selectedScenario, setVehicles}) => {
+  const [tableData, setTableData] = useState(()=> {
+    
+    if(scenerios.length===0)
+    { 
+      return [];
+    }
+    else  
+    {
+      console.log({selectedScenario});
+      return vehicles[selectedScenario?.scenarioId]
+    };
+  //   [
+  //   // {
+  //   //   vehicleId: 123,
+  //   //   vehicleName: "Scenario Name",
+  //   //   positionX: 2,
+  //   //   positionY: 1,
+  //   //   speed: 10,
+  //   //   direction: "forward",
+  //   // },
+  //   ...vehicles[selectedScenario?.scenarioId]
+  // ] : 
+  // []
+});
+  console.log("here", vehicles[selectedScenario.scenarioId]);
   const deleteHandler = (index) => {
     console.log(index);
     let tableDataCopy = [...tableData];
     tableDataCopy.splice(index, 1);
-    // setTableData(tableDataCopy);
+    setTableData(tableDataCopy);
     setVehicles(vehicles=> ({...vehicles, [selectedScenario.scenarioId]: tableDataCopy}))
   };
 

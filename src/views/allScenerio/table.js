@@ -5,7 +5,7 @@ import ModalRoot from "../../components/modals/components/ModalRoot";
 import ModalService from "../../components/modals/services/ModalService";
 import "./table.scss";
 
-const TableComponent = ({scenerios, vehicles}) => {
+const TableComponent = ({scenerios, vehicles, setScenerios}) => {
   // const {vehicles, setScenerios, setVehicles, scenerios, scenarioDropdownValues} = useContext(GlobalContext);
   const modifiedScenarios= scenerios.reduce((acc, item)=>{
     acc.push({...item, vehiclesCount:  vehicles[item.scenarioId]?.length || 0 });
@@ -13,6 +13,7 @@ const TableComponent = ({scenerios, vehicles}) => {
   }, []);
 
   console.log({modifiedScenarios});
+  console.log({setScenerios});
   const [tableData, setTableData] = useState(
   //   [
   //   {
@@ -30,6 +31,8 @@ const TableComponent = ({scenerios, vehicles}) => {
     let tableDataCopy = [...tableData];
     tableDataCopy.splice(index, 1);
     setTableData(tableDataCopy);
+    setScenerios(tableDataCopy);
+
   };
 
   const editHandler = () => {};
