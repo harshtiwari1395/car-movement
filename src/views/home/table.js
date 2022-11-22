@@ -4,7 +4,7 @@ import ModalRoot from "../../components/modals/components/ModalRoot";
 import ModalService from "../../components/modals/services/ModalService";
 import "./table.scss";
 
-const TableComponent = ({vehicles, selectedScenario}) => {
+const TableComponent = ({vehicles, selectedScenario, setVehicles}) => {
   console.log({vehicles, selectedScenario, all:  vehicles[selectedScenario]});
   const [tableData, setTableData] = useState([
     // {
@@ -22,7 +22,8 @@ const TableComponent = ({vehicles, selectedScenario}) => {
     console.log(index);
     let tableDataCopy = [...tableData];
     tableDataCopy.splice(index, 1);
-    setTableData(tableDataCopy);
+    // setTableData(tableDataCopy);
+    setVehicles(vehicles=> ({...vehicles, [selectedScenario.scenarioId]: tableDataCopy}))
   };
 
   const openEditModal = () => {

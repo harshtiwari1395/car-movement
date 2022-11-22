@@ -117,7 +117,7 @@ export default () => {
             options={scenarioDropdownValues}
             onChange={(value) => setSelectedScenario(value)}
           />
-          <Table vehicles={vehicles} selectedScenario={selectedScenario} />
+          <Table vehicles={vehicles} selectedScenario={selectedScenario} setVehicles={setVehicles} />
           <button onClick={startSimulation}>Start Simulation</button>
           <button onClick={stopSimulation}>Stop Simulation</button>
           <VehicleTracker vehicles={vehicles} 
