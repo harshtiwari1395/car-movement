@@ -1,19 +1,22 @@
-import React, { Fragment, useState, useContext } from "react";
-import NewColumnModal from "./NewColumnModal";
-import NewTicketModal from "./NewTicketModal";
+import React, { Fragment, useState, useContext, useCallback } from "react";
+import EditModal from "./EditModal";
+// import AddModal from "./AddModal";
 import ModalRoot from "../../components/modals/components/ModalRoot";
 import ModalService from "../../components/modals/services/ModalService";
+import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons'
 import "./table.scss";
 
-const TableComponent = ({scenerios, vehicles, setScenerios}) => {
-  // const {vehicles, setScenerios, setVehicles, scenerios, scenarioDropdownValues} = useContext(GlobalContext);
-  const modifiedScenarios= scenerios.reduce((acc, item)=>{
-    acc.push({...item, vehiclesCount:  vehicles[item.scenarioId]?.length || 0 });
-    return acc;
-  }, []);
 
-  console.log({modifiedScenarios});
-  console.log({setScenerios});
+
+const TableComponent = ({scenerios, vehicles, setScenerios}) => {
+  const modifiedScenarios= useCallback(()=> scenerios.reduce((acc, item)=>{
+    acc.push({...item, vehiclesCount:  vehicles[item.scenarioId]?.length || 0 });
+    console.log("acc", acc);
+    return acc;
+  }, []),[scenerios] );
+
   const [tableData, setTableData] = useState(
   //   [
   //   {
@@ -23,9 +26,19 @@ const TableComponent = ({scenerios, vehicles, setScenerios}) => {
   //     vehiclesCount: "Number of Vehicles",
   //   },
   // ]
-  modifiedScenarios
+  // modifiedScenarios()
+  ()=>scenerios.reduce((acc, item)=>{
+    acc.push({...item, vehiclesCount:  vehicles[item.scenarioId]?.length || 0 });
+    console.log("acc", acc);
+    return acc;
+  }, [])
   );
-  console.log({scenerios});
+  console.log({modif: tableData})
+  console.log( "modif2", scenerios.reduce((acc, item)=>{
+    acc.push({...item, vehiclesCount:  vehicles[item.scenarioId]?.length || 0 });
+    console.log("acc", acc);
+    return acc;
+  }, []));
   const deleteHandler = (index) => {
     console.log(index);
     let tableDataCopy = [...tableData];
@@ -45,12 +58,19 @@ const TableComponent = ({scenerios, vehicles, setScenerios}) => {
     "Edit",
     "Delete",
   ];
-  const openAddModal = () => {
-    ModalService.open(NewTicketModal, {  });
+  // const openAddModal = () => {
+  //   ModalService.open(AddModal, {  });
+  // };
+  const openEditModal = (rowIndex) => {
+    ModalService.open(EditModal, { scenerios, setScenerios,
+       rowIndex, setTableData, vehicles 
+    });
   };
-  const openEditModal = () => {
-    ModalService.open(NewColumnModal, {  });
-  };
+  const navigate = useNavigate();
+
+  function handleAddClick() {
+    navigate('/addVehical');
+  }
   return (
     <Fragment>
       <ModalRoot/>
@@ -71,19 +91,24 @@ const TableComponent = ({scenerios, vehicles, setScenerios}) => {
                 <td>{ele.time}</td>
                 <td>{ele.vehiclesCount}</td>
                 <td>
-                  <a href="#" onClick={openAddModal}>
+                  {/* <a href="#" onClick={handleAddClick}>
                     Add Vehicle
-                  </a>
+                  </a> */}
+                  <FontAwesomeIcon onClick={handleAddClick} icon={faPlus}/>
+
                 </td>
                 <td>
-                  <a href="#" onClick={openEditModal}>
+                  {/* <a href="#" onClick={()=>openEditModal(rowIndex)}>
                     Edit
-                  </a>
+                  </a> */}
+                  <FontAwesomeIcon onClick={(e) => editHandler(rowIndex)} icon={faEdit}/>
+
                 </td>
                 <td>
-                  <a href="#" onClick={(e) => deleteHandler()}>
+                  {/* <a href="#" onClick={(e) => deleteHandler()}>
                     Delete
-                  </a>
+                  </a> */}
+                  <FontAwesomeIcon onClick={(e) => deleteHandler(rowIndex)} icon={faTrash}/>
                 </td>
               </tr>
             );

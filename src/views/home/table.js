@@ -1,7 +1,9 @@
 import React, { Fragment, useState } from "react";
-import NewTicketModal from "./NewTicketModal";
+import EditVehicleModal from "./EditVehicleModal";
 import ModalRoot from "../../components/modals/components/ModalRoot";
 import ModalService from "../../components/modals/services/ModalService";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import "./table.scss";
 
 const TableComponent = ({scenerios, vehicles, selectedScenario, setVehicles}) => {
@@ -38,8 +40,11 @@ const TableComponent = ({scenerios, vehicles, selectedScenario, setVehicles}) =>
     setVehicles(vehicles=> ({...vehicles, [selectedScenario.scenarioId]: tableDataCopy}))
   };
 
-  const openEditModal = () => {
-    ModalService.open(NewTicketModal, {  });
+  const openEditModal = (rowIndex) => {
+    ModalService.open(EditVehicleModal, {setVehicles, setTableData, 
+      rowIndex, vehicles,
+      selectedScenarioId: selectedScenario? selectedScenario.scenarioId : null
+    });
   };
 
   const headers = [
@@ -74,14 +79,13 @@ const TableComponent = ({scenerios, vehicles, selectedScenario, setVehicles}) =>
                 <td>{ele.speed}</td>
                 <td>{ele.direction}</td>
                 <td>
-                  <a href="#" onClick={openEditModal}>
+                  {/* <a href="#" onClick={()=>openEditModal(rowIndex)}>
                     Edit
-                  </a>
+                  </a> */}
+                  <FontAwesomeIcon onClick={()=>openEditModal(rowIndex)} icon={faEdit} />
                 </td>
                 <td>
-                  <a href="#" onClick={(rowIndex) => deleteHandler(rowIndex)}>
-                    Delete
-                  </a>
+                  <FontAwesomeIcon onClick={() => deleteHandler(rowIndex)} icon={faTrash} />
                 </td>
               </tr>
             );

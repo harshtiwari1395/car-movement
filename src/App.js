@@ -5,7 +5,9 @@ import Layout from "./components/layout/index";
 import AddScenario from "./views/addScenerio/index";
 import AllScenario from "./views/allScenerio/index";
 import AddVehical from "./views/addVehicle/index";
+import useLocalStorage from "./hooks/useLocalStorage";
 import "./App.scss";
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Comp = Layout(Home);
 const AddScenarioWithLayout= Layout(AddScenario);
@@ -14,7 +16,20 @@ const AddVehicalWithLayout= Layout(AddVehical);
 
 export const GlobalContext= createContext(null);
 const App = () => {
-  const [vehicles, setVehicles] = useState({"test": [
+  const [vehicles, setVehicles] = 
+  // useState({"test": [
+  //   {
+  //     vehicleId: 123,
+  //     vehicleName: "testVehical",
+  //     initialPositionX: 200,
+  //     initialPositionY: 200,
+  //     speed:50,
+  //     direction: "down",
+  //     color : `#${Math.floor(Math.random()*16777215).toString(16)}`,
+  //     display: "block"
+  //   }
+  // ]});
+  useLocalStorage("vehicles", {"test": [
     {
       vehicleId: 123,
       vehicleName: "testVehical",
@@ -27,7 +42,15 @@ const App = () => {
     }
   ]});
   //change how vehicles are stores {scenario1: [...vehicls],scenario2: [...vehicls] }
-  const [scenerios, setScenerios] = useState([
+  const [scenerios, setScenerios] = 
+  // useState([
+  //   {
+  //     scenarioId: "test",
+  //     scenarioName: "test",
+  //     time: 2,
+  //   }
+  // ]);
+  useLocalStorage("scenerios", [
     {
       scenarioId: "test",
       scenarioName: "test",

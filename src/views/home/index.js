@@ -4,10 +4,11 @@ import { GlobalContext } from "../../App";
 // import Select from "react-dropdown-select";
 import Select from "react-select";
 import Table from "./table";
+
 ////REPLACE react-dropdown-select WITH REACT-SELCT
 const VehicleTracker = ({ vehicles, scenario }) => {
   console.log("track", { vehicles, scenario });
-  const scenarioId = scenario ? scenario.scenarioId: null;
+  const scenarioId = scenario ? scenario.scenarioId : null;
   // console.log("veh", vehicles[scenarioId]);
   return (
     <div id="OverviewText4">
@@ -58,9 +59,6 @@ export default () => {
     if (!locationHandler.current) {
       const vehiclesCopy = { ...vehicles };
       locationHandler.current = setInterval(() => {
-        // if(){
-        //   conditional for running
-        // }
         console.log(
           "vehiclesCopy[selectedScenario]",
           vehiclesCopy[selectedScenario]
@@ -71,7 +69,7 @@ export default () => {
           vehiclesCopy[selectedScenario.scenarioId].map((item) => {
             switch (item.direction) {
               case "forward":
-                if (item.initialPositionX + item.speed <= 780)
+                if (item.initialPositionX + item.speed <= 1080)
                   item.initialPositionX += item.speed;
                 else item.display = "none";
                 break;
@@ -86,7 +84,7 @@ export default () => {
                 else item.display = "none";
                 break;
               case "down":
-                if (item.initialPositionY + item.speed <= 780)
+                if (item.initialPositionY + item.speed <= 380)
                   item.initialPositionY += item.speed;
                 else item.display = "none";
                 break;
@@ -109,12 +107,12 @@ export default () => {
     <div>
       <div className="box">
         <div className="box__top">Scenario</div>
-        <div className="box__content">
-          <Select
+        <Select
             defaultValue={selectedScenario}
             options={scenarioDropdownValues}
             onChange={(value) => setSelectedScenario(value)}
           />
+        <div style={{ width: "80vw" }}>
           {selectedScenario ? (
             <Table
               vehicles={vehicles}
@@ -123,8 +121,24 @@ export default () => {
               setVehicles={setVehicles}
             />
           ) : null}
-          <button onClick={startSimulation}>Start Simulation</button>
-          <button onClick={stopSimulation}>Stop Simulation</button>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              marginBottom: 10,
+            }}
+          >
+            <button
+              style={{ backgroundColor: "green" }}
+              onClick={startSimulation}
+            >
+              Start Simulation
+            </button>
+            <button style={{ backgroundColor: "red" }} onClick={stopSimulation}>
+              Stop Simulation
+            </button>
+          </div>
+
           <VehicleTracker
             vehicles={vehicles}
             // scenarioId={selectedScenario}
