@@ -6,4 +6,9 @@ Steps to install:
 
 Project uses local storage: Any previous states on browser will be saved.
 
+Here are the implementation details of the above application :
+  --React Hooks like useContext, useState used
+  --Custom react hooks for using local storage used
+  --Context use to share data throughout the whole application
+
 

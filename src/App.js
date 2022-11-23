@@ -7,7 +7,6 @@ import AllScenario from "./views/allScenerio/index";
 import AddVehical from "./views/addVehicle/index";
 import useLocalStorage from "./hooks/useLocalStorage";
 import "./App.scss";
-// import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Comp = Layout(Home);
 const AddScenarioWithLayout= Layout(AddScenario);
